@@ -1,0 +1,13 @@
+install python, pip, virtualenv
+create a virtual environment
+install django -> pip install django
+create a new project -> django-admin startproject {name}
+create a new app -> django-admin startapp {name}
+configure the setings file, adding the app
+install django-rest-framework -> pip install djangorestframework
+add the 'rest_framework' line on settings file
+add model class
+add serializer class
+add view class
+add url patterns
+add api urls to project urls

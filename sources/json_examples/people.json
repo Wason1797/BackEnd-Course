@@ -1,0 +1,16 @@
+[
+    {
+        "name": "Wladymir",
+        "dni": "1724561921",
+        "age": 21,
+        "status": "active",
+        "permisions": ["manage", "grade"]        
+    },
+    {
+        "name": "Alexander",
+        "dni": "1724561922",
+        "age": 22,
+        "status": "inactive",
+        "permisions": ["manage"]
+    }
+]

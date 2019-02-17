@@ -1,0 +1,37 @@
+// Example class on Java/ C#
+public Class Person
+{
+    private int id;
+    private String name;
+    private Date birthDate;
+
+    Person(int id, String name, Date birthDate)
+    {
+        this.id = id;
+        this.name = name;
+        this.birthDate = birthDate;
+    }
+}
+
+# Example class on python
+
+class Person:
+    def __init__(self, _id, _name, _birthDate):
+        self.id = _id
+        self.name = _name
+        self.birthDate = _birthDate 
+
+/*All of them can be represented or serialized in the same way*/
+
+{
+    "id" = 1,
+    "name" = "Wladymir"
+    "birthDate" = "17-08-1997"
+}
+
+Retrieve a Person -> GET -> {protocol}{server:port}/PersonAPI/Person/{person-id}
+
+Insert a Person -> POST -> {protocol}{server:port}/PersonAPI/Person/Save
+
+Retrieve all Persons -> GET {protocol}{server:port}/PersonAPI/Persons
+
