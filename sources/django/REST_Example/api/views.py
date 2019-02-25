@@ -14,3 +14,13 @@ class PersonView(APIView):
                        person_birthDate='17-08-1997')
         serializer = PersonSerializer(dummy)
         return Response(serializer.data)
+
+
+class SumView(APIView):
+
+    def get(self, request, first_num, second_num):
+        result = float(first_num)+float(second_num)
+        return Response({
+            "owner": "Wladymir",
+            "result": result
+        })
