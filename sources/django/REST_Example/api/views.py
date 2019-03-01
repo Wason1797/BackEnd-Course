@@ -20,16 +20,32 @@ class PersonView(APIView):
 class SumView(APIView):
 
     def get(self, request):
+
         first_num = request.GET.get('first_num')
         second_num = request.GET.get('seccond_num')
-        result = float(first_num)+float(second_num)
-        return Response({
-            "owner": "Wladymir",
-            "result": result
-        })
+        user = request.GET.get('user')
+
+        if first_num is not None and second_num \
+                is not None and user is not None:
+
+            result = float(first_num)+float(second_num)
+            return Response({
+                "owner": "Wladymir",
+                "result": result,
+                "userMsg": "the solicitant was: "+user
+            })
+        else:
+            return Response({
+                "status": "one or some parameters where not provided"
+            })
 
     def post(self, request):
-        sum_arr = request.data["values"]
+        sum_arr = []
+        operation = request.data["operation"]
+        if operation != "float":
+            sum_arr = [float(x) for x in request.data["values"]]
+        else:
+            sum_arr = request.data["values"]
         result = reduce(lambda acum, current: acum+current, sum_arr)
         return Response({
             "status": "OK",
