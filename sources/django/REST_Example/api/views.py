@@ -1,8 +1,9 @@
 # from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import Person
-from .serializers import PersonSerializer
+from .models import Person, City, Client
+from .serializers import PersonSerializer, ClientCompleteSerializer, \
+    CitySerializer, ClientSerializer
 from functools import reduce
 # Create your views here.
 
@@ -51,3 +52,53 @@ class SumView(APIView):
             "status": "OK",
             "result": result
         })
+
+
+class ClientView(APIView):
+
+    def get(self, request):
+        param = request.GET.get('id')
+        if param is None:
+            clients = Client.objects.all()
+            serializedClients = ClientSerializer(clients, many=True)
+            return Response(serializedClients.data, status=200)
+        else:
+            client = Client.objects.get(client_id=int(param))
+            serializedClient = ClientCompleteSerializer(client)
+            return Response(serializedClient.data, status=200)
+
+    def post(self, request):
+        serializedClient = ClientSerializer(data=request.data)
+        if serializedClient.is_valid():
+            serializedClient.save()
+            return Response({"status": "Client Saved Correctly"}, status=200)
+        else:
+            return Response({
+                "error": True,
+                "errors": serializedClient.errors
+            })
+
+
+class CityView(APIView):
+
+    def get(self, request):
+        param = request.GET.get('id')
+        if param is None:
+            cities = City.objects.all()
+            serializedCities = CitySerializer(cities, many=True)
+            return Response(serializedCities.data, status=200)
+        else:
+            city = City.objects.get(city_id=int(param))
+            serializedCity = CitySerializer(city)
+            return Response(serializedCity.data, status=200)
+
+    def post(self, request):
+        serializedCity = CitySerializer(data=request.data)
+        if serializedCity.is_valid():
+            serializedCity.save()
+            return Response({"status": "City Saved Correctly"}, status=200)
+        else:
+            return Response({
+                "error": True,
+                "errors": serializedCity.errors
+            })

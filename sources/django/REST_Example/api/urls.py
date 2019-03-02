@@ -10,4 +10,9 @@ urlpatterns = [
     path('calculatorAPI/sum/',
          views.SumView.as_view()),
 
+    path('dbAPI/client/',
+         views.ClientView.as_view()),
+
+    path('dbAPI/city/',
+         views.CityView.as_view()),
 ]
