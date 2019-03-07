@@ -2,6 +2,13 @@ from rest_framework import serializers
 from .models import Person, Client, City
 
 
+class PersonSimpleSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Person
+        fields = ('person_name', 'person_birthDate')
+
+
 class PersonSerializer(serializers.ModelSerializer):
 
     class Meta:
