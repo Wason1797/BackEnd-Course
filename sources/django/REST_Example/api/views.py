@@ -91,7 +91,7 @@ class ClientView(APIView):
             return Response(serializedClients.data, status=200)
         else:
             client = Client.objects.get(client_id=int(param))
-            serializedClient = ClientCompleteSerializer(client)
+            serializedClient = ClientSerializer(client)
             return Response(serializedClient.data, status=200)
 
     def post(self, request):
@@ -104,6 +104,26 @@ class ClientView(APIView):
                 "error": True,
                 "errors": serializedClient.errors
             })
+
+    def put(self, request):
+        clientInstance = Client.objects.get(
+            client_id=int(request.data['client_id']))
+        serializedClient = ClientSerializer(clientInstance, data=request.data)
+        if serializedClient.is_valid():
+            serializedClient.save()
+            return Response({"status": "Client Updated Correctly"}, status=200)
+        else:
+            return Response({
+                "error": True,
+                "errors": serializedClient.errors
+            })
+
+    def delete(self, request):
+        param = request.GET.get('id')
+        if param is not None:
+            Client.objects.filter(client_id=int(param)).delete()
+            return Response({"status":
+                             "Client deleted succesfully"}, status=200)
 
 
 class CityView(APIView):
