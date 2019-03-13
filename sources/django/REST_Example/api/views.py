@@ -87,7 +87,7 @@ class ClientView(APIView):
         param = request.GET.get('id')
         if param is None:
             clients = Client.objects.all()
-            serializedClients = ClientSerializer(clients, many=True)
+            serializedClients = ClientCompleteSerializer(clients, many=True)
             return Response(serializedClients.data, status=200)
         else:
             client = Client.objects.get(client_id=int(param))
