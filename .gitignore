@@ -112,3 +112,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+sources/django/REST_Example/secrets.json
+educational-instance-key.pem
